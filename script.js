@@ -31,6 +31,7 @@ $("body").on("keyup", function(e) {
 
         // get duration of the key pressed event
         var duration = ( e.timeStamp - pressed ) / 1000;
+        console.log(duration);
         // Output the letter in a span tag
         output.innerHTML += '<span class="klass">' + character + '</span>';
 
