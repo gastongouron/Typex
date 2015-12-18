@@ -18,12 +18,25 @@ WebFontConfig = {
 var output = document.getElementById('output'),
     pressed = 0
 var character
+var list = document.getElementById("output");
+console.log(list);
 // Listen to keydown via window element
 $("body").on("keypress", function(e) {
    if (pressed) return;
-   character = String.fromCharCode(e.which);
+   console.log(e.which);
+   if (e.which === 13) character = '<br>'
+   else if (e.which === 8) list.removeChild(listLastChild);
+   else character = String.fromCharCode(e.which);;
    pressed=e.timeStamp;
 });
+
+$("body").on("keydown", function(e) {
+    var lastguy = $( "p span:last-child" );
+    console.log(lastguy);
+   if (e.which === 8) lastguy.remove();
+});
+
+
 
 // Listen to keyup via window element
 $("body").on("keyup", function(e) {
@@ -32,6 +45,7 @@ $("body").on("keyup", function(e) {
         // get duration of the key pressed event
         var duration = ( e.timeStamp - pressed ) / 1000;
         console.log(duration);
+
         // Output the letter in a span tag
         output.innerHTML += '<span class="klass">' + character + '</span>';
 
@@ -42,6 +56,7 @@ $("body").on("keyup", function(e) {
         // Change character family to Open Sans and font style to Italic
         target.style.fontFamily = "open sans";
         target.style.fontStyle = "italic";
+        target.style.fontSize = 50;
 
     // Conditional statement that modify fontWeight referring to the duration of the key pressed event
     if (duration < 0.04)
